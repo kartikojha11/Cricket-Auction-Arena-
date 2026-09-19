@@ -1,0 +1,1 @@
+{"name":"cricket-auction-arena-tests","private":true,"type":"module","scripts":{"test":"node tests/auction.test.js && node tests/scoring.test.js && node tests/validation.test.js"}}

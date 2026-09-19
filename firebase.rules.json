@@ -1,0 +1,32 @@
+{
+  "rules": {
+    "rooms": {
+      "$room": {
+        ".read": "auth != null",
+
+        ".write": "auth != null && (
+          !data.exists() ||
+          (
+            newData.exists() &&
+            data.child('hostId').val() == auth.uid
+          )
+        )",
+
+        "players": {
+          "$uid": {
+            ".validate": "newData.hasChildren(['id','name','teamSize','budget','spent','squad','connected','submitted']) &&
+              newData.child('id').val() == $uid &&
+              newData.child('name').isString() &&
+              newData.child('name').val().length > 0 &&
+              newData.child('name').val().length <= 18 &&
+              newData.child('budget').isNumber() &&
+              newData.child('spent').isNumber() &&
+              newData.child('budget').val() >= 0 &&
+              newData.child('spent').val() >= 0 &&
+              newData.child('squad').exists()"
+          }
+        }
+      }
+    }
+  }
+}
